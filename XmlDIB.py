@@ -4,6 +4,7 @@ import streamlit as st
 import base64
 
 st.set_page_config(page_title="XmlDIB", layout="wide", page_icon="🌲")
+
 ##### Oculta o botão Deploy do Streamilit
 st.markdown("""
     <style>
@@ -22,13 +23,15 @@ st.markdown("""
 def get_base64_image(image_path):
     with open(image_path, "rb") as image_file:
         encoded_string = base64.b64encode(image_file.read()).decode()
-    return encoded_string        # Exibir o conteúdo do formulário de anamnese emocional
-# Caminho da imagem
-image_path = "fundo_softdib.jpg"
+    return encoded_string
+# Obtém o diretório do script
+current_dir = os.path.dirname(os.path.abspath(__file__))
+# Constrói o caminho completo para a imagem
+image_path = os.path.join(current_dir, "fundo_softdib.jpg")
+
 # Codificação da imagem em base64
 base64_image = get_base64_image(image_path)
 
-# CSS para definir a imagem de fundo com transparência
 st.markdown(
     f"""
     <style>
@@ -106,7 +109,13 @@ def main():
     </div>
     """, unsafe_allow_html=True)
 
-    st.image("C:\\python-projeto\\LISTA\\Logo_sd.png", width=200)  # Ajuste o caminho da logo aqui
+    # Adicionar a logo ao topo
+    # Obtém o diretório atual do script
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    # Constrói o caminho da imagem dinamicamente
+    logo_path = os.path.join(current_dir, "Logo_sd.png")
+    # Exibe a logo
+    st.image(logo_path, width=200)
 
     col1, col2 = st.columns(2)
 
