@@ -2,6 +2,7 @@ import xml.etree.ElementTree as ET
 import pandas as pd
 import streamlit as st
 import base64
+import os
 
 st.set_page_config(page_title="XmlDIB", layout="wide", page_icon="🌲")
 
