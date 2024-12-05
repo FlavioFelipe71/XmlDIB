@@ -6,6 +6,20 @@ import os
 
 st.set_page_config(page_title="XmlDIB", layout="wide", page_icon="🌲")
 
+
+# CSS para ocultar o elemento <header>
+st.markdown(
+    """
+    <style>
+        /* Ocultar o header completo */
+        .stAppHeader {
+            display: none;
+        }
+    </style>
+    """, 
+    unsafe_allow_html=True
+)
+
 ##### Oculta o botão Deploy do Streamilit
 st.markdown("""
     <style>
