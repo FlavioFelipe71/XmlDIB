@@ -3,11 +3,6 @@ import pandas as pd
 import streamlit as st
 import base64
 import os
-import time
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
-
 
 st.set_page_config(page_title="XmlDIB", layout="wide", page_icon="🌲")
 
