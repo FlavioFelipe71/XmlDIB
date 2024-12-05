@@ -3,6 +3,11 @@ import pandas as pd
 import streamlit as st
 import base64
 import os
+import time
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+
 
 st.set_page_config(page_title="XmlDIB", layout="wide", page_icon="🌲")
 
@@ -44,6 +49,46 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
+# Função para iniciar o Selenium
+def start_selenium():
+    app_url = "https://csvsei901.streamlit.app/"
+
+    # Configuração do WebDriver
+    options = Options()
+    options.add_argument("--start-maximized")  # Abrir em tela cheia
+    driver = webdriver.Chrome(options=options)
+
+    try:
+        driver.get(app_url)
+
+        # Função para ocultar os elementos indesejados
+        def hide_elements():
+            try:
+                # Ocultar o link "https://streamlit.io/cloud"
+                link_element = driver.find_element(By.CSS_SELECTOR, 'a[href="https://streamlit.io/cloud"]')
+                driver.execute_script("arguments[0].style.display = 'none';", link_element)
+            except:
+                pass  # Ignorar se o elemento não for encontrado
+
+            try:
+                # Ocultar a imagem do avatar
+                img_element = driver.find_element(By.CSS_SELECTOR, 'img[data-testid="appCreatorAvatar"]')
+                driver.execute_script("arguments[0].style.display = 'none';", img_element)
+            except:
+                pass  # Ignorar se o elemento não for encontrado
+
+        # Loop para ocultar os elementos continuamente
+        while True:
+            hide_elements()
+            time.sleep(1)  # Pausa de 1 segundo para evitar sobrecarga
+
+    except Exception as e:
+        st.error(f"Ocorreu um erro no Selenium: {e}")
+    finally:
+        driver.quit()
+##########################################################################
+
 ###### CSS para definir a imagem de fundo [Fim]
 
 # Função para ler o XML
@@ -117,6 +162,12 @@ def main():
     logo_path = os.path.join(current_dir, "Logo_sd.png")
     # Exibe a logo
     st.image(logo_path, width=200)
+
+        # Botão para iniciar o Selenium
+    if st.button("Executar Selenium"):
+        st.info("Iniciando Selenium...")
+        start_selenium()
+        st.success("Selenium executado com sucesso!")
 
     col1, col2 = st.columns(2)
 
