@@ -118,6 +118,8 @@ def main():
     # Exibe a logo
     st.image(logo_path, width=200)
 
+    col1, col2 = st.columns(2)
+
     with col1:
         st.markdown(f"<div style='font-size: 25px; font-weight: bold; color: #1E90FF;margin-top: 30px'>Editar o XML Tags: descricaoMercadoria, numeroDI, fornecedorNome com Base no CSV</div>", unsafe_allow_html=True)
         #st.title("Editar o XML Tags: < descricaoMercadoria >, < numeroDI >, < fornecedorNome > com Base no CSV")
