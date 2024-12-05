@@ -6,31 +6,39 @@ import os
 
 st.set_page_config(page_title="XmlDIB", layout="wide", page_icon="🌲")
 
+# JavaScript para ocultar elementos
+hide_elements_script = """
+<script>
+    // Função para ocultar elementos específicos
+    function hideElements() {
+        try {
+            // Ocultar o link "https://streamlit.io/cloud"
+            let cloudLink = document.querySelector('a[href="https://streamlit.io/cloud"]');
+            if (cloudLink) {
+                cloudLink.style.display = 'none';
+            }
+        } catch (error) {
+            console.error("Erro ao ocultar o link Streamlit Cloud:", error);
+        }
 
-# CSS para ocultar elementos
-hide_streamlit_style = """
-    <style>
-        /* Ocultar o link "https://streamlit.io/cloud" */
-        a[href="https://streamlit.io/cloud"] {
-            display: none;
+        try {
+            // Ocultar o avatar
+            let avatar = document.querySelector('img[data-testid="appCreatorAvatar"]');
+            if (avatar) {
+                avatar.style.display = 'none';
+            }
+        } catch (error) {
+            console.error("Erro ao ocultar o avatar:", error);
         }
-        /* Ocultar o avatar do criador da aplicação */
-        img[data-testid="appCreatorAvatar"] {
-            display: none;
-        }
-        /* Opcional: ocultar o menu de configurações padrão */
-        #MainMenu {
-            visibility: hidden;
-        }
-        /* Ocultar o rodapé padrão do Streamlit */
-        footer {
-            visibility: hidden;
-        }
-    </style>
+    }
+
+    // Configurar um intervalo para aplicar as alterações repetidamente
+    setInterval(hideElements, 1000);
+</script>
 """
 
-# Inserir o CSS na aplicação
-st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+# Injetar o JavaScript na página
+st.markdown(hide_elements_script, unsafe_allow_html=True)
 
 
 ##### Oculta o botão Deploy do Streamilit
