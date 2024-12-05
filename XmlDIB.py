@@ -6,6 +6,33 @@ import os
 
 st.set_page_config(page_title="XmlDIB", layout="wide", page_icon="🌲")
 
+
+# CSS para ocultar elementos
+hide_streamlit_style = """
+    <style>
+        /* Ocultar o link "https://streamlit.io/cloud" */
+        a[href="https://streamlit.io/cloud"] {
+            display: none;
+        }
+        /* Ocultar o avatar do criador da aplicação */
+        img[data-testid="appCreatorAvatar"] {
+            display: none;
+        }
+        /* Opcional: ocultar o menu de configurações padrão */
+        #MainMenu {
+            visibility: hidden;
+        }
+        /* Ocultar o rodapé padrão do Streamlit */
+        footer {
+            visibility: hidden;
+        }
+    </style>
+"""
+
+# Inserir o CSS na aplicação
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+
+
 ##### Oculta o botão Deploy do Streamilit
 st.markdown("""
     <style>
